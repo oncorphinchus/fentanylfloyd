@@ -38,7 +38,7 @@ export default function ClipboardPage() {
           setClipboardContent(data.content)
           // Don't set isSaved to true on initial load
         }
-      } catch (err) {
+      } catch (_err) {
         setError('Failed to load content')
       }
     }
@@ -60,7 +60,7 @@ export default function ClipboardPage() {
         }),
       })
       setIsSaved(true)
-    } catch (err) {
+    } catch (_err) {
       setError('Failed to save content')
     } finally {
       setIsLoading(false)
@@ -81,7 +81,7 @@ export default function ClipboardPage() {
       await navigator.clipboard.writeText(clipboardContent)
       setShowNotification(true)
       setTimeout(() => setShowNotification(false), 2000)
-    } catch (err) {
+    } catch (_err) {
       setError('Failed to copy to clipboard')
     } finally {
       setIsLoading(false)

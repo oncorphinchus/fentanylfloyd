@@ -60,9 +60,9 @@ export async function GET(request: Request) {
       }
 
       return NextResponse.json({ content })
-    } catch (error: any) {
+    } catch (error: unknown) {
       // Handle NoSuchKey error gracefully
-      if (error.Code === 'NoSuchKey') {
+      if (error instanceof Error && error.message === 'NoSuchKey') {
         return NextResponse.json({ content: '' }, { status: 200 })
       }
       throw error // Re-throw other errors
