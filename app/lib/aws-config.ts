@@ -1,27 +1,26 @@
 import { S3Client } from '@aws-sdk/client-s3'
 
-export const BUCKET_NAME = process.env.BUCKET_NAME
+// Check for environment variables at runtime
+const requiredEnvVars = {
+  BUCKET_NAME: process.env.BUCKET_NAME!,
+  AWS_REGION: process.env.AWS_REGION!,
+  AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID!,
+  AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY!,
+} as const
 
-if (!BUCKET_NAME) {
-  throw new Error('BUCKET_NAME is not defined')
-}
+// Validate all required environment variables
+Object.entries(requiredEnvVars).forEach(([key, value]) => {
+  if (!value) {
+    throw new Error(`${key} environment variable is not defined`)
+  }
+})
 
-if (!process.env.AWS_REGION) {
-  throw new Error('AWS_REGION is not defined')
-}
-
-if (!process.env.AWS_ACCESS_KEY_ID) {
-  throw new Error('AWS_ACCESS_KEY_ID is not defined')
-}
-
-if (!process.env.AWS_SECRET_ACCESS_KEY) {
-  throw new Error('AWS_SECRET_ACCESS_KEY is not defined')
-}
+export const BUCKET_NAME = requiredEnvVars.BUCKET_NAME
 
 export const s3Client = new S3Client({
-  region: process.env.AWS_REGION,
+  region: requiredEnvVars.AWS_REGION,
   credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    accessKeyId: requiredEnvVars.AWS_ACCESS_KEY_ID,
+    secretAccessKey: requiredEnvVars.AWS_SECRET_ACCESS_KEY,
   }
 }) 
