@@ -9,8 +9,8 @@ export function ClipboardIcon() {
       pathLength: 1, 
       opacity: 1,
       transition: {
-        pathLength: { duration: 2, repeat: Infinity },
-        opacity: { duration: 0.5 }
+        pathLength: { duration: 3.5, ease: "easeInOut" },
+        opacity: { duration: 1 }
       }
     }
   }

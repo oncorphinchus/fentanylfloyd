@@ -3,8 +3,8 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { nanoid } from 'nanoid'
-import { motion } from 'framer-motion'
-import { FadeInScale, SpringHover } from './components/Animations'
+import { FadeInScale } from './components/Animations'
+import { FancyButton } from './components/FancyButton'
 
 export default function Home() {
   const [customPath, setCustomPath] = useState('')
@@ -20,7 +20,7 @@ export default function Home() {
       <FadeInScale className="container mx-auto px-4 py-16">
         <div className="max-w-md mx-auto">
           <h1 className="text-4xl font-bold text-white mb-8 text-center">
-            Fancy Clipboard
+            Fentstash
           </h1>
           
           <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8">
@@ -28,18 +28,16 @@ export default function Home() {
               type="text"
               value={customPath}
               onChange={(e) => setCustomPath(e.target.value)}
-              className="w-full bg-transparent text-white border border-white/20 rounded-lg p-4 mb-4"
+              className="w-full bg-transparent text-white border border-white/20 rounded-lg p-4 mb-4 focus:ring-2 ring-purple-500 outline-none"
               placeholder="Enter custom path (optional)"
             />
             
-            <SpringHover>
-              <button
-                onClick={handleCreatePage}
-                className="w-full bg-gradient-to-r from-purple-500 to-blue-500 text-white px-8 py-3 rounded-full"
-              >
-                Create Clipboard
-              </button>
-            </SpringHover>
+            <FancyButton
+              onClick={handleCreatePage}
+              className="w-full"
+            >
+              Create Clipboard
+            </FancyButton>
           </div>
         </div>
       </FadeInScale>

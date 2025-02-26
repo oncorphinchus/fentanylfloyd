@@ -1,13 +1,14 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import { motion, useMotionTemplate, useMotionValue } from 'framer-motion'
-import { useState } from 'react'
 import { ClipboardIcon } from '../components/ClipboardIcon'
 import { CopyNotification } from '../components/CopyNotification'
-import { FadeInScale, SpringHover } from '../components/Animations'
+import { FadeInScale } from '../components/Animations'
 import { ParticleEffect } from '../components/ParticleEffect'
+import { HomeButton } from '../components/HomeButton'
+import { FancyButton } from '../components/FancyButton'
 
 export default function ClipboardPage() {
   const params = useParams()
@@ -17,6 +18,7 @@ export default function ClipboardPage() {
   const [showNotification, setShowNotification] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [isSaved, setIsSaved] = useState(false)
   
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
@@ -27,43 +29,41 @@ export default function ClipboardPage() {
     transparent 80%
   )`
 
-  // Load clipboard content when page loads
   useEffect(() => {
     const loadContent = async () => {
       try {
-        setIsLoading(true)
         const response = await fetch(`/api/clipboard?pageId=${pageId}`)
-        if (!response.ok) {
-          throw new Error('Failed to load content')
+        if (response.ok) {
+          const data = await response.json()
+          setClipboardContent(data.content)
+          // Don't set isSaved to true on initial load
         }
-        const data = await response.json()
-        setClipboardContent(data.content)
       } catch (err) {
-        setError('Failed to load clipboard content')
-      } finally {
-        setIsLoading(false)
+        setError('Failed to load content')
       }
     }
-
     loadContent()
   }, [pageId])
 
-  // Save content to S3 when it changes
-  const handleContentChange = async (content: string) => {
+  const handleSave = async () => {
     try {
-      setClipboardContent(content)
+      setIsLoading(true)
+      setError(null)
       await fetch('/api/clipboard', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          content,
+          content: clipboardContent,
           pageId,
         }),
       })
+      setIsSaved(true)
     } catch (err) {
       setError('Failed to save content')
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -90,6 +90,7 @@ export default function ClipboardPage() {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-purple-900 to-blue-900 relative overflow-hidden">
+      <HomeButton />
       <ParticleEffect />
       
       <FadeInScale className="container mx-auto px-4 py-16 relative">
@@ -102,33 +103,38 @@ export default function ClipboardPage() {
             <ClipboardIcon />
           </div>
 
-          <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20"
-          >
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20">
             <textarea
               value={clipboardContent}
-              onChange={(e) => handleContentChange(e.target.value)}
+              onChange={(e) => {
+                setClipboardContent(e.target.value)
+                setIsSaved(false)
+              }}
               className="w-full h-40 bg-transparent text-white border border-white/20 rounded-lg p-4 mono focus:ring-2 ring-purple-500 outline-none"
               placeholder="Paste your content here..."
               disabled={isLoading}
             />
             
-            <SpringHover>
-              <button
-                onClick={handleCopy}
-                disabled={isLoading || !clipboardContent}
-                className={`mt-4 bg-gradient-to-r from-purple-500 to-blue-500 text-white px-8 py-3 rounded-full transition-all
-                  ${isLoading || !clipboardContent ? 'opacity-50 cursor-not-allowed' : 'hover:shadow-lg hover:shadow-purple-500/20'}`}
-              >
-                {isLoading ? 'Copying...' : 'Copy to Clipboard'}
-              </button>
-            </SpringHover>
+            <FancyButton
+              onClick={handleSave}
+              disabled={isLoading || isSaved}
+              className="mt-4"
+            >
+              {isLoading ? 'Saving...' : isSaved ? 'Saved!' : 'Save'}
+            </FancyButton>
+            
+            <FancyButton
+              onClick={handleCopy}
+              disabled={isLoading || !clipboardContent}
+              className="ml-4 mt-4"
+            >
+              {isLoading ? 'Copying...' : 'Copy to Clipboard'}
+            </FancyButton>
             
             {error && (
               <p className="mt-2 text-red-400 text-sm">{error}</p>
             )}
-          </motion.div>
+          </div>
         </motion.div>
       </FadeInScale>
       

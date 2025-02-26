@@ -1,7 +1,15 @@
 import { S3Client, ListObjectsV2Command, DeleteObjectCommand, GetObjectCommand } from '@aws-sdk/client-s3'
 
-const s3Client = new S3Client({ region: process.env.AWS_REGION })
-const BUCKET_NAME = process.env.AWS_BUCKET_NAME!
+if (!process.env.CUSTOM_AWS_REGION) {
+  throw new Error('CUSTOM_AWS_REGION is not defined')
+}
+
+if (!process.env.AWS_BUCKET_NAME) {
+  throw new Error('AWS_BUCKET_NAME is not defined')
+}
+
+const s3Client = new S3Client({ region: process.env.CUSTOM_AWS_REGION })
+const BUCKET_NAME = process.env.AWS_BUCKET_NAME
 
 export const handler = async () => {
   try {
