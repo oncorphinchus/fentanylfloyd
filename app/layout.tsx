@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Fancy Clipboard - Modern Copy & Paste",
+  title: "I can't clip -George Flopper",
   description: "A beautiful clipboard manager with 3D animations and modern design",
 };
 
