@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    serverActions: false,
+    serverActions: {
+      enabled: false
+    }
   },
   webpack: (config) => {
     config.resolve.fallback = {
