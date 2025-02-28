@@ -120,6 +120,10 @@ export default function ClipboardPage() {
               disabled={isLoading}
             />
             
+            <p className="text-white/50 text-sm mt-2 mb-4">
+              Content will be automatically deleted after 4 hours
+            </p>
+            
             <FancyButton
               onClick={handleSave}
               disabled={isLoading || isSaved}
