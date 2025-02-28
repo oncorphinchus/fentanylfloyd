@@ -24,8 +24,9 @@ export default function ClipboardPage() {
   const mouseY = useMotionValue(0)
 
   const background = useMotionTemplate`radial-gradient(
-    600px circle at ${mouseX}px ${mouseY}px,
+    800px circle at ${mouseX}px ${mouseY}px,
     rgba(29, 78, 216, 0.15),
+    rgba(147, 51, 234, 0.1) 40%,
     transparent 80%
   )`
 
@@ -68,10 +69,8 @@ export default function ClipboardPage() {
   }
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    const { currentTarget, clientX, clientY } = e
-    const { left, top } = currentTarget.getBoundingClientRect()
-    mouseX.set(clientX - left)
-    mouseY.set(clientY - top)
+    mouseX.set(e.clientX)
+    mouseY.set(e.clientY)
   }
 
   const handleCopy = async () => {
@@ -89,14 +88,20 @@ export default function ClipboardPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-purple-900 to-blue-900 relative overflow-hidden">
+    <main 
+      className="min-h-screen bg-gradient-to-br from-purple-900 to-blue-900 relative overflow-hidden"
+      onMouseMove={handleMouseMove}
+    >
+      <motion.div
+        className="absolute inset-0"
+        style={{ background }}
+      />
       <HomeButton />
       <ParticleEffect />
       
       <FadeInScale className="container mx-auto px-4 py-16 relative">
         <motion.div
           className="relative rounded-2xl"
-          onMouseMove={handleMouseMove}
           style={{ background }}
         >
           <div className="mx-auto mb-8 flex justify-center">
