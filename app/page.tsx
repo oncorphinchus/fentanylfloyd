@@ -51,12 +51,12 @@ export default function Home() {
                 src="https://ir76fjq5jybic4ap2xj4sjzl.agents.do-ai.run/static/chatbot/widget.js"
                 data-agent-id="11b0efd1-4d1b-11f0-bf8f-4e013e2ddde4"
                 data-chatbot-id="0UsObW6IvqsWw65bR_w4kmiA_zCE4I88"
-                data-name="agent-06192025 Chatbot"
+                data-name="Yve ur twinkie faggot chatbot"
                 data-primary-color="#5B21B6" // Adjusted to a darker purple from your gradient
                 data-secondary-color="#C084FC" // Adjusted to a lighter purple for contrast
                 data-button-background-color="#8B5CF6" // Adjusted to a vibrant purple
-                data-starting-message="Haiiiiii, I'm Yve! 💅✨ Ready for some deranged chat? Let's talk electric cars, IT, or maybe some furry fun! 😉🐾"
-                data-logo="/static/chatbot/icons/default-agent.svg"
+                data-starting-message="Haiiiiii, I'm Yve! 💅✨ Ready for some deranged chat? Let's talk about anal intercourse and my hate for niggers! 😉🐾"
+                data-logo="https://www.svgrepo.com/show/304593/gay-flag.svg"
                 strategy="afterInteractive" // Recommended for third-party scripts
               ></Script>
             </div>
