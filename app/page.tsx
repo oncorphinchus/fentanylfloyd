@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { nanoid } from 'nanoid'
 import { FadeInScale } from './components/Animations'
 import { FancyButton } from './components/FancyButton'
+import Script from 'next/script' // Import Next.js Script component
 
 export default function Home() {
   const [customPath, setCustomPath] = useState('')
@@ -23,7 +24,7 @@ export default function Home() {
             Fentstash
           </h1>
           
-          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8">
+          <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 mb-8"> {/* Added mb-8 for spacing below this div */}
             <input
               type="text"
               value={customPath}
@@ -39,6 +40,28 @@ export default function Home() {
               Create Clipboard
             </FancyButton>
           </div>
+
+          {/* Yve's Chatbot Section - Centered and below the typing field */}
+          <div className="flex justify-center mt-8"> {/* mt-8 for spacing from above content */}
+            <div className="w-full max-w-md bg-white/10 backdrop-blur-lg rounded-2xl overflow-hidden shadow-lg border border-white/20" style={{ height: '500px' }}> {/* Adjust height as needed */}
+              {/* The DigitalOcean chatbot widget will render inside this div */}
+              {/* Using Script component to load external JS, strategy="afterInteractive" is good for chat widgets */}
+              <Script
+                async
+                src="https://ir76fjq5jybic4ap2xj4sjzl.agents.do-ai.run/static/chatbot/widget.js"
+                data-agent-id="11b0efd1-4d1b-11f0-bf8f-4e013e2ddde4"
+                data-chatbot-id="0UsObW6IvqsWw65bR_w4kmiA_zCE4I88"
+                data-name="agent-06192025 Chatbot"
+                data-primary-color="#5B21B6" // Adjusted to a darker purple from your gradient
+                data-secondary-color="#C084FC" // Adjusted to a lighter purple for contrast
+                data-button-background-color="#8B5CF6" // Adjusted to a vibrant purple
+                data-starting-message="Haiiiiii, I'm Yve! 💅✨ Ready for some deranged chat? Let's talk electric cars, IT, or maybe some furry fun! 😉🐾"
+                data-logo="/static/chatbot/icons/default-agent.svg"
+                strategy="afterInteractive" // Recommended for third-party scripts
+              ></Script>
+            </div>
+          </div>
+
         </div>
       </FadeInScale>
     </main>
