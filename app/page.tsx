@@ -42,7 +42,9 @@ export default function Home() {
           </div>
 
           {/* Yve's Chatbot Section - Centered and below the typing field */}
-        
+          <div className="flex justify-center mt-8"> {/* mt-8 for spacing from above content */}
+            <div className="w-full max-w-md bg-white/10 backdrop-blur-lg rounded-2xl overflow-hidden shadow-lg border border-white/20" style={{ height: '500px' }}> {/* Adjust height as needed */}
+              {/* The DigitalOcean chatbot widget will render inside this div */}
               {/* Using Script component to load external JS, strategy="afterInteractive" is good for chat widgets */}
               <Script
                 async
@@ -57,6 +59,8 @@ export default function Home() {
                 data-logo="https://www.svgrepo.com/show/304593/gay-flag.svg"
                 strategy="afterInteractive" // Recommended for third-party scripts
               ></Script>
+            </div>
+          </div>
 
         </div>
       </FadeInScale>
