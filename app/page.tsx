@@ -39,21 +39,7 @@ export default function Home() {
             >
               Create Clipboard
             </FancyButton>
-          </div>
 
-          {/* Yve's Chatbot Section - Centered and below the typing field */}
-        
-              {/* Using Script component to load external JS, strategy="afterInteractive" is good for chat widgets */}
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-KMQY2SXDMY"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-KMQY2SXDMY');
-</script>
-
-        </div>
       </FadeInScale>
     </main>
   )
