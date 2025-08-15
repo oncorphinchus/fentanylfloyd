@@ -44,19 +44,15 @@ export default function Home() {
           {/* Yve's Chatbot Section - Centered and below the typing field */}
         
               {/* Using Script component to load external JS, strategy="afterInteractive" is good for chat widgets */}
-              <Script
-                async
-                src="https://ir76fjq5jybic4ap2xj4sjzl.agents.do-ai.run/static/chatbot/widget.js"
-                data-agent-id="11b0efd1-4d1b-11f0-bf8f-4e013e2ddde4"
-                data-chatbot-id="0UsObW6IvqsWw65bR_w4kmiA_zCE4I88"
-                data-name="Yve ur twinkie faggot chatbot"
-                data-primary-color="#5B21B6" // Adjusted to a darker purple from your gradient
-                data-secondary-color="#C084FC" // Adjusted to a lighter purple for contrast
-                data-button-background-color="#8B5CF6" // Adjusted to a vibrant purple
-                data-starting-message="Haiiiiii, I'm Yve! 💅✨ Ready for some deranged chat? Let's talk about anal intercourse and my hate for niggers! 😉🐾"
-                data-logo="https://www.svgrepo.com/show/304593/gay-flag.svg"
-                strategy="afterInteractive" // Recommended for third-party scripts
-              ></Script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KMQY2SXDMY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-KMQY2SXDMY');
+</script>
 
         </div>
       </FadeInScale>
