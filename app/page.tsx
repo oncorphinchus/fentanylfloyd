@@ -38,16 +38,9 @@ export default function Home() {
               className="w-full"
             >
               Create Clipboard
-                          </div>
             </FancyButton>
-              {/* Using Script component to load external JS, strategy="afterInteractive" is good for chat widgets */}
-              <Script
-                async
- {
-                data-logo="https://www.svgrepo.com/show/304593/gay-flag.svg"
-                strategy="afterInteractive" // Recommended for third-party scripts
-              ></Script>
-            </div>
+          </div>
+        </div>
       </FadeInScale>
     </main>
   )
