@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation'
 import { nanoid } from 'nanoid'
 import { FadeInScale } from './components/Animations'
 import { FancyButton } from './components/FancyButton'
-import Script from 'next/script' // Import Next.js Script component
 
 export default function Home() {
   const [customPath, setCustomPath] = useState('')
