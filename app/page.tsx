@@ -44,6 +44,7 @@ export default function Home() {
           {/* Yve's Chatbot Section - Centered and below the typing field */}
         
               {/* Using Script component to load external JS, strategy="afterInteractive" is good for chat widgets */}
+              <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-KMQY2SXDMY"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
